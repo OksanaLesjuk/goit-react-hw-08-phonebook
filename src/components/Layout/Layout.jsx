@@ -7,10 +7,10 @@ export const Layout = () => {
   return (
     <Container>
       <Header>
-        <h1>Your phonebook</h1>
-        <nav>
+        <h1>Phonebook</h1>
+        {/* <nav>
           <NavLinkSign to="/login">Sign in</NavLinkSign>
-        </nav>
+        </nav> */}
       </Header>
       <Suspense fallback={<div>Loading...</div>}>
         <Outlet />
