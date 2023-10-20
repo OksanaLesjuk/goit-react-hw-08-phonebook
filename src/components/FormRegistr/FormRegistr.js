@@ -1,38 +1,38 @@
 import React from 'react';
 import { useFormik } from 'formik';
 
-const FormRegister = () => {
+const FormRegister = ({ registration }) => {
     const formik = useFormik({
         initialValues: {
-            firstName: '',
-            lastName: '',
+
+            name: '',
             email: '',
             password: ''
         },
         onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+            registration({
+                name: values.name,
+                email: values.email,
+                password: values.password,
+            });
+            console.log('values :>> ', values);
+
+
         },
     });
     return (
         <form onSubmit={formik.handleSubmit}>
 
             <input
-                id="firstName"
-                name="firstName"
+                id="name"
+                name="name"
                 type="text"
-                placeholder="First Name"
+                placeholder="User Name"
                 onChange={formik.handleChange}
-                value={formik.values.firstName}
+                value={formik.values.name}
             />
 
-            <input
-                id="lastName"
-                name="lastName"
-                type="text"
-                placeholder="Last Name"
-                onChange={formik.handleChange}
-                value={formik.values.lastName}
-            />
+
 
             <input
                 id="email"
@@ -45,6 +45,7 @@ const FormRegister = () => {
 
             <input
                 id="password"
+                type='password'
                 name="password"
                 placeholder="Password"
                 value={formik.values.password}

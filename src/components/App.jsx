@@ -12,14 +12,15 @@ import { Layout } from './Layout/Layout';
 import Login from 'pages/Login/Login';
 import Register from 'pages/Register/Register';
 import Home from 'pages/Home/Home';
+import Contacts from 'pages/Contacts/Contacts';
 
 export const App = () => {
-  const dispatch = useDispatch();
-  const { isLoading, error } = useSelector(getContacts);
+  // const dispatch = useDispatch();
+  // const { isLoading, error } = useSelector(getContacts);
 
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchContacts());
+  // }, [dispatch]);
 
   return (
     <Routes>
@@ -27,6 +28,7 @@ export const App = () => {
         <Route index element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
+        <Route path="contacts" element={<Contacts />} />
       </Route>
     </Routes>
     /* <div>

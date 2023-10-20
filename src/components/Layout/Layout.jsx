@@ -8,9 +8,6 @@ export const Layout = () => {
     <Container>
       <Header>
         <h1>Phonebook</h1>
-        {/* <nav>
-          <NavLinkSign to="/login">Sign in</NavLinkSign>
-        </nav> */}
       </Header>
       <Suspense fallback={<div>Loading...</div>}>
         <Outlet />
