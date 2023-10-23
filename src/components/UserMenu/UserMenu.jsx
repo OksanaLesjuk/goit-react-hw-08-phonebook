@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { deleteToken, logOutUser } from 'redux/operations';
-import { getToken, getUserData } from 'redux/selectors';
+import { getUserData } from 'redux/selectors';
 
 const UserMenu = () => {
   const { email } = useSelector(getUserData);
