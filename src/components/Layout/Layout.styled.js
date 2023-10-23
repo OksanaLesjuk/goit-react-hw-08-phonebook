@@ -8,19 +8,7 @@ export const Container = styled.div`
   padding: 0 16px;
 `;
 
-export const Header = styled.header`
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  gap: 12px;
-  padding: 8px 0;
-  margin-bottom: 16px;
-  border-bottom:none;
-  box-shadow: 0 2px 0 0 darkgray;
-  /* > nav {
-    display: flex;
-  } */
-`;
+
 
 // export const NavLinkSign = styled(NavLink)`
 // padding: 8px 16px;

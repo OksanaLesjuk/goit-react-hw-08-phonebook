@@ -1,38 +1,36 @@
 import FormRegister from 'components/FormRegistr/FormRegistr'
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useEffect } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux'
+import { NavLink, useNavigate } from 'react-router-dom';
 import { signUpUser } from 'redux/operations';
+import { getToken, getUserLoginStatus } from 'redux/selectors';
+
 
 
 
 const Register = () => {
-    // const registration = async (params) => {
-    //     try {
-    //         const data = await signUpUser(params);
-    //         console.log('data :>> ', data);
-    //     } catch (e) {
-    //         console.error(e);
-    //     }
-    // }
-    const [errorMessage, setErrorMessage] = useState(null);
+    const isAuth = useSelector(getToken);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-
-    const dispatch = useDispatch()
     const registration = (params) => {
-        console.log('params :>> ', params);
-        const { name, email, password } = params;
 
-        dispatch(signUpUser({ name, email, password }))
-            .unwrap()
-            .then(() => setErrorMessage(null))
-            .catch(e => {
-                console.log(e);
-                setErrorMessage(e);
-            });
+
+        dispatch(signUpUser(params))
+
     }
+    useEffect(() => {
+        isAuth && navigate('/contacts')
+    }, [isAuth, navigate])
 
     return (
-        <FormRegister registration={registration} />
+
+        <>
+            <FormRegister registration={registration} />
+            <p>If you are already registered</p>
+            <NavLink to="/login">Log in</NavLink>
+        </>
     )
 }
 

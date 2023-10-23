@@ -1,14 +1,22 @@
 import { Link, NavLink, Outlet } from 'react-router-dom';
 
-import { Suspense } from 'react';
-import { Container, Header, NavLinkSign, StyledLink } from './Layout.styled';
+import { Suspense, useEffect } from 'react';
+import { Container } from './Layout.styled';
+import { useDispatch } from 'react-redux';
+import { getStatusUser } from 'redux/operations';
+import Header from 'components/Header/Header';
 
 export const Layout = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getStatusUser())
+      .unwrap()
+      .then()
+      .catch(e => console.log(e));
+  }, [dispatch]);
   return (
     <Container>
-      <Header>
-        <h1>Phonebook</h1>
-      </Header>
+      <Header />
       <Suspense fallback={<div>Loading...</div>}>
         <Outlet />
       </Suspense>

@@ -1,27 +1,44 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signUpUser } from "./operations";
+import { getStatusUser, logOutUser, signInUser, signUpUser } from "./operations";
 
 
 const initialState = {
     user: { name: null, email: null },
     token: null,
-    isLoggedIn: false,
+
 
 };
 
+const handleAuthFulfilled = (state, { payload }) => {
+
+    state.user = payload.user;
+    state.token = payload.token;
+
+}
+
 const usersSlice = createSlice({
-    name: 'user',
+    name: 'authUser',
     initialState: initialState,
     extraReducers: (builder) => {
         builder
-            .addCase(signUpUser.fulfilled, (state, { payload }) => {
-                state.isLoggedIn = true;
-                state.user = payload.user;
-                state.token = payload.token;
-            },)
+            .addCase(signUpUser.fulfilled, handleAuthFulfilled)
+            .addCase(getStatusUser.fulfilled, (state, { payload }) => {
+
+                state.user = payload;
+
+
+            }
+            )
+            .addCase(signInUser.fulfilled, handleAuthFulfilled)
+            .addCase(logOutUser.fulfilled, (state) => {
+                state.user = { name: null, email: null };
+                state.token = null;
+
+
+            })
     }
 
 })
 
-export const { signUpUsers } = usersSlice.actions;
-export const userReducer = usersSlice.reducer;
+export const { signUpUsers, signInUsers, logOutUsers } = usersSlice.actions;
+export const authUserReducer = usersSlice.reducer;

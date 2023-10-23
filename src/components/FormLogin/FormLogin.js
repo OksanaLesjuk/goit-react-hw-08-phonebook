@@ -1,16 +1,21 @@
 
 import { useFormik } from 'formik';
+import { useState } from 'react';
 
-
-
-const FormLogin = () => {
+const FormLogin = ({ loginUser }) => {
+    const [showPassword, setShowPassword] = useState(false);
     const formik = useFormik({
         initialValues: {
             email: '',
             password: ''
         },
         onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+
+            loginUser({
+                email: values.email,
+                password: values.password,
+
+            })
 
         },
     });
@@ -26,21 +31,29 @@ const FormLogin = () => {
                 placeholder="Email"
                 onChange={formik.handleChange}
                 value={formik.values.email}
-                value={formik.values.email}
-                onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-
+                autoComplete="new-password"
                 required
             />
 
-            <input
-                id="password"
-                name="password"
-                placeholder="Password"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur} />
-            <button type="submit">Sign In</button>
+            <div>
+                <input
+                    id="password"
+                    type={showPassword ? 'text' : 'password'}
+                    name="password"
+                    placeholder="Password"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    autoComplete="new-password"
+                    required
+                />
+                <button type="button" onClick={() => setShowPassword(!showPassword)}>
+                    {showPassword ? 'Hide Password' : 'Show Password'}
+                </button>
+            </div>
+
+            <button type="submit">Log In</button>
 
         </form>
     );
