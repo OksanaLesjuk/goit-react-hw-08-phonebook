@@ -16,6 +16,7 @@ const UserMenu = () => {
   };
   return (
     <div>
+      <span class="material-icons md-36">face</span>
       <p>{email}</p>
       <button onClick={handleClick} type="submit">
         Log Out

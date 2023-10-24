@@ -2,8 +2,12 @@
 import { useFormik } from 'formik';
 import { useState } from 'react';
 
+
 const FormLogin = ({ loginUser }) => {
     const [showPassword, setShowPassword] = useState(false);
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -48,6 +52,12 @@ const FormLogin = ({ loginUser }) => {
                     autoComplete="new-password"
                     required
                 />
+                {/* <button
+                    type="button"
+                    onClick={togglePasswordVisibility}
+                >
+                    {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                </button> */}
                 <button type="button" onClick={() => setShowPassword(!showPassword)}>
                     {showPassword ? 'Hide Password' : 'Show Password'}
                 </button>
