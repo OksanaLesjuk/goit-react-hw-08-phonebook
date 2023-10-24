@@ -7,9 +7,7 @@ import { useState } from 'react';
 
 const FormLogin = ({ loginUser }) => {
     const [showPassword, setShowPassword] = useState(false);
-    // const togglePasswordVisibility = () => {
-    //     setShowPassword(!showPassword);
-    // };
+
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleMouseDownPassword = (event) => {
@@ -64,7 +62,7 @@ const FormLogin = ({ loginUser }) => {
                     onBlur={formik.handleBlur}
                     autoComplete="current-password"
                     name="password"
-                    margin="normal"
+
                     id="outlined-adornment-password"
                     type={showPassword ? 'text' : 'password'}
 

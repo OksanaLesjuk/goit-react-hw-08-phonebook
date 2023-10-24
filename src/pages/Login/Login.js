@@ -1,10 +1,13 @@
+import { Typography } from '@mui/material';
 import FormLogin from 'components/FormLogin/FormLogin'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { signInUser } from 'redux/operations';
 import { getToken } from 'redux/selectors';
-
+import Box from '@mui/material/Box';
+import { Link as RouterLink } from 'react-router-dom';
+import { Link as MuiLink } from '@mui/material';
 const Login = () => {
     const dispatch = useDispatch();
     const isAuth = useSelector(getToken);
@@ -20,10 +23,20 @@ const Login = () => {
 
     return (
         <> <FormLogin loginUser={loginUser} />
-            <p>If you don't have an account yet
+            <Box variant="body2"
+                display="flex"
+                justifyContent="flex-end"
+                alignItems="center"
+                marginLeft='auto'
+                marginRight='auto'
+                gap='10px'
+                style={{ width: '500px' }}>
+                <Typography>If you don't have an account yet
 
-            </p>
-            <NavLink to="/register">Sign up</NavLink></>
+                </Typography>
+                <MuiLink component={RouterLink} color="inherit" style={{ fontSize: '18px', cursor: 'pointer' }} to="/register">Sign up</MuiLink>
+            </Box>
+        </>
 
     )
 }

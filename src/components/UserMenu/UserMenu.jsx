@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import { deleteToken, logOutUser } from 'redux/operations';
 import { getUserData } from 'redux/selectors';
 import Avatar from '@mui/material/Avatar';
-import { Button, Divider, Stack } from '@mui/material';
+import { Button, Divider, Stack, Typography } from '@mui/material';
 
 const UserMenu = () => {
   const { email } = useSelector(getUserData);
@@ -26,7 +26,7 @@ const UserMenu = () => {
       <Avatar src="/broken-image.jpg" />
       {/* <span class="material-icons md-36">face</span> */}
       {/* <span class="material-icons-outlined">account_circle</span> */}
-      <p>{email}</p>
+      <Typography>{email}</Typography>
       <Button onClick={handleClick} type="submit">
         Log Out
       </Button>

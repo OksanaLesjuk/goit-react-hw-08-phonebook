@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
+import { Box, Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 
 const FormRegister = ({ registration }) => {
     const [showPassword, setShowPassword] = useState(false);
     const [passwordMismatch, setPasswordMismatch] = useState(false);
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
     const formik = useFormik({
         initialValues: {
 
@@ -34,80 +42,139 @@ const FormRegister = ({ registration }) => {
         },
     });
     return (
-        <form onSubmit={formik.handleSubmit}>
-
-            <div>
-                <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    placeholder="User Name"
-                    onChange={formik.handleChange}
-                    value={formik.values.name}
-                    autoComplete="off"
-                    required
-
-                />
-                <p>Fill out, so we know how to address you</p>
-            </div>
+        <Box
+            component="form"
+            onSubmit={formik.handleSubmit}
+            style={{ marginLeft: 'auto', marginRight: 'auto' }}  >
 
 
-
-            <div>  <input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="Email"
-                onChange={formik.handleChange}
-                value={formik.values.email}
-                autoComplete="off"
-                required
-            />
-                <p>Use it as a login to access your personal account</p></div>
-
-            <div>
-                <div>
-                    <input
-                        id="password"
-                        type={showPassword ? 'text' : 'password'}
-                        name="password"
-                        placeholder="Password"
-                        value={formik.values.password}
+            <Box>
+                <Box
+                    display="flex"
+                    flexDirection='row'
+                    gap='20px'
+                    alignItems='center'
+                >
+                    <TextField
+                        id="outlined-name"
+                        name="name"
+                        type="text"
+                        label="User Name"
                         onChange={formik.handleChange}
+                        value={formik.values.name}
+                        autoComplete="off"
+                        margin="normal"
+                        style={{ width: '360px' }}
+                        required
+
+                    />
+                    <Typography variant="caption">Fill out, so we know how to address you.</Typography>
+                </Box>
+
+
+
+                <Box
+                    display="flex"
+                    flexDirection='row'
+                    gap='20px'
+                    alignItems='center'
+                >
+                    <TextField
+                        id="outlined-email"
+                        name="email"
+                        type="email"
+                        title="email"
+                        label="Email"
+                        style={{ width: '360px' }}
+                        onChange={formik.handleChange}
+                        value={formik.values.email}
                         onBlur={formik.handleBlur}
-                        autoComplete="new-password"
+                        autoComplete="username"
+                        margin="normal"
                         required
                     />
-                    <button type="button" onClick={() => setShowPassword(!showPassword)}>
-                        {showPassword ? 'Hide Password' : 'Show Password'}
-                    </button>
+                    <Typography variant="caption">Use it as a login to access your personal account.</Typography>
+                </Box>
 
-                </div>
-                <p>The password must be at least 8 characters long. It can include Latin letters and numbers</p>
-            </div>
+                <Box
+                    display="flex"
+                    flexDirection='row'
+                    gap='20px'
+                    alignItems='center'>
 
-            <input
-                id="confirmPassword"
-                type={showPassword ? 'text' : 'password'}
-                name="confirmPassword"
-                placeholder="Confirm Password"
-                value={formik.values.confirmPassword}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                autoComplete="new-password"
-                required
-            />
+                    <FormControl variant="outlined" margin="normal">
+                        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                        <OutlinedInput
+                            value={formik.values.password}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            autoComplete="new-password"
+                            name="password"
+                            style={{ width: '360px' }}
+                            id="outlined-adornment-password"
+                            type={showPassword ? 'text' : 'password'}
+
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge="end"
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                            label="Password"
+                        />
+                    </FormControl>
 
 
-            {formik.errors.password && formik.touched.password ? (
-                <div style={{ color: 'red' }}>{formik.errors.password}</div>
-            ) : null}
-            {passwordMismatch && (
-                <div style={{ color: 'red' }}>Passwords do not match</div>
-            )}
 
-            <button type="submit">Sign Up</button>
-        </form>
+                    <Typography variant="caption">The password must be at least 8 characters long. It can include Latin letters and numbers.</Typography>
+                </Box>
+
+                <FormControl variant="outlined" margin="normal">
+                    <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
+                    <OutlinedInput
+                        value={formik.values.confirmPassword}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+
+                        name="confirmPassword"
+                        style={{ width: '360px' }}
+                        id="outlined-adornment-confirm-password"
+                        type={showPassword ? 'text' : 'password'}
+
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                >
+                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                        label="Confirm Password"
+                    />
+                </FormControl>
+
+
+
+                {formik.errors.password && formik.touched.password ? (
+                    <div style={{ color: 'red' }}>{formik.errors.password}</div>
+                ) : null}
+                {passwordMismatch && (
+                    <div style={{ color: 'red' }}>Passwords do not match</div>
+                )}
+            </Box>
+
+            <Button style={{ fontSize: '18px' }} type="submit">Sign Up</Button>
+        </Box>
     );
 };
 
