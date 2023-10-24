@@ -1,12 +1,19 @@
 
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { Box, Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 import { useState } from 'react';
 
 
 const FormLogin = ({ loginUser }) => {
     const [showPassword, setShowPassword] = useState(false);
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
+    // const togglePasswordVisibility = () => {
+    //     setShowPassword(!showPassword);
+    // };
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
     };
     const formik = useFormik({
         initialValues: {
@@ -23,49 +30,65 @@ const FormLogin = ({ loginUser }) => {
 
         },
     });
+
+
+
     return (
-        <form onSubmit={formik.handleSubmit}>
+        <Box
+            component="form"
+            onSubmit={formik.handleSubmit}
+            style={{ width: '600px', marginLeft: 'auto', marginRight: 'auto' }}  >
 
-
-            <input
-                id="email"
+            <TextField
+                id="outlined-email"
                 name="email"
                 type="email"
                 title="email"
-                placeholder="Email"
+                label="Email"
+                fullWidth
                 onChange={formik.handleChange}
                 value={formik.values.email}
                 onBlur={formik.handleBlur}
-                autoComplete="new-password"
+                autoComplete="username"
+                margin="normal"
                 required
             />
 
-            <div>
-                <input
-                    id="password"
-                    type={showPassword ? 'text' : 'password'}
-                    name="password"
-                    placeholder="Password"
+
+
+            <FormControl variant="outlined" fullWidth margin="normal">
+                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                <OutlinedInput
                     value={formik.values.password}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    autoComplete="new-password"
-                    required
+                    autoComplete="current-password"
+                    name="password"
+                    margin="normal"
+                    id="outlined-adornment-password"
+                    type={showPassword ? 'text' : 'password'}
+
+                    endAdornment={
+                        <InputAdornment position="end">
+                            <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                edge="end"
+                            >
+                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                        </InputAdornment>
+                    }
+                    label="Password"
                 />
-                {/* <button
-                    type="button"
-                    onClick={togglePasswordVisibility}
-                >
-                    {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
-                </button> */}
-                <button type="button" onClick={() => setShowPassword(!showPassword)}>
-                    {showPassword ? 'Hide Password' : 'Show Password'}
-                </button>
-            </div>
+            </FormControl>
 
-            <button type="submit">Log In</button>
 
-        </form>
+
+            <Button type="submit" style={{ marginLeft: 'auto', display: 'block' }}>Log In</Button>
+
+        </Box >
     );
 };
 

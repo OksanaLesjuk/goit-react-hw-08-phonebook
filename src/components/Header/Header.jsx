@@ -1,18 +1,18 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { getToken } from 'redux/selectors';
-import { StyledHeader } from './Header.styled';
 
 import UserMenu from 'components/UserMenu/UserMenu';
+import { Stack } from '@mui/material';
 
 const Header = () => {
   const isAuth = useSelector(getToken);
 
   return (
-    <StyledHeader>
+    <Stack direction="row" alignItems="center" justifyContent="space-between">
       <h1>Phonebook</h1>
       {isAuth && <UserMenu />}
-    </StyledHeader>
+    </Stack>
   );
 };
 
