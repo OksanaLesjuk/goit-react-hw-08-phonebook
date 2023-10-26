@@ -52,6 +52,7 @@ const FormRegister = ({ registration }) => {
                 <Box
                     display="flex"
                     flexDirection='row'
+                    flexWrap='wrap'
                     gap='20px'
                     alignItems='center'
                 >
@@ -76,6 +77,7 @@ const FormRegister = ({ registration }) => {
                 <Box
                     display="flex"
                     flexDirection='row'
+                    flexWrap='wrap'
                     gap='20px'
                     alignItems='center'
                 >
@@ -99,6 +101,7 @@ const FormRegister = ({ registration }) => {
                 <Box
                     display="flex"
                     flexDirection='row'
+                    flexWrap='wrap'
                     gap='20px'
                     alignItems='center'>
 

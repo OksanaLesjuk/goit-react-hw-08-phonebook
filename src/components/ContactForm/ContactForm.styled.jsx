@@ -1,44 +1,47 @@
-import styled from 'styled-components';
+import { Button, InputBase, alpha, styled } from '@mui/material';
 
-export const Form = styled('form')(() => {
-  return {
-    display: 'flex',
-    flexDirection: 'column',
-    paddingBottom: '40px',
+export const ContactInput = styled(InputBase)(({ theme }) => ({
+  'label + &': {
+    marginTop: theme.spacing(3),
+  },
+  '& .MuiInputBase-input': {
+    borderRadius: 4,
+    position: 'relative',
+    backgroundColor: theme.palette.mode === 'light' ? '#F3F6F9' : '#1A2027',
+    border: '1px solid',
+    borderColor: theme.palette.mode === 'light' ? '#E0E3E7' : '#2D3843',
+    fontSize: 16,
+    width: 'auto',
+    padding: '10px 12px',
+    transition: theme.transitions.create([
+      'border-color',
+      'background-color',
+      'box-shadow',
+    ]),
 
-    width: '500px',
-    fontSize: '18px',
-    fontWeight: '500',
-    borderColor: 'black',
-  };
-});
-
-export const Input = styled('input')(() => {
-  return {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '200px',
-    padding: '8px 16px',
-    marginTop: '8px',
-    marginBottom: '24px',
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
     '&:focus': {
-      outline: 'none',
-      borderColor: 'blue',
+      boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
+      borderColor: theme.palette.primary.main,
     },
-  };
-});
+  },
+}));
 
-export const ContactsFormButton = styled('button')(() => {
+export const ContactsFormButton = styled(Button)(({ theme }) => {
   return {
-    display: 'block',
-
     width: '160px',
     padding: '8px 10px',
-    // marginTop: '8px',
-    // marginBottom: '24px',
-    '&:hover': {
-      outline: 'none',
-      borderColor: 'blue',
-    },
+    marginBottom: '60px',
   };
 });

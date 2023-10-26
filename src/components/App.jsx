@@ -5,6 +5,7 @@ import Login from 'pages/Login/Login';
 import Register from 'pages/Register/Register';
 import Home from 'pages/Home/Home';
 import Contacts from 'pages/Contacts/Contacts';
+import PrivateRoute from 'guards/PrivateRoute';
 
 export const App = () => {
   return (
@@ -13,7 +14,14 @@ export const App = () => {
         <Route index element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
-        <Route path="contacts" element={<Contacts />} />
+        <Route
+          path="contacts"
+          element={
+            <PrivateRoute>
+              <Contacts />
+            </PrivateRoute>
+          }
+        />
       </Route>
     </Routes>
   );

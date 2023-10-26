@@ -30,7 +30,7 @@ const Login = () => {
                 marginLeft='auto'
                 marginRight='auto'
                 gap='10px'
-                style={{ width: '500px' }}>
+                style={{ width: '400px' }}>
                 <Typography>If you don't have an account yet
 
                 </Typography>

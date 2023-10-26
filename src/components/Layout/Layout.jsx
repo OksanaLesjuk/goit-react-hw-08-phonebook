@@ -5,6 +5,7 @@ import { Container } from './Layout.styled';
 import { useDispatch } from 'react-redux';
 import { getStatusUser } from 'redux/operations';
 import Header from 'components/Header/Header';
+import { CircularProgress } from '@mui/material';
 
 export const Layout = () => {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ export const Layout = () => {
   return (
     <Container>
       <Header />
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<CircularProgress disableShrink />}>
         <Outlet />
       </Suspense>
     </Container>

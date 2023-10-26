@@ -35,7 +35,7 @@ const FormLogin = ({ loginUser }) => {
         <Box
             component="form"
             onSubmit={formik.handleSubmit}
-            style={{ width: '600px', marginLeft: 'auto', marginRight: 'auto' }}  >
+            style={{ width: '400 px', marginLeft: 'auto', marginRight: 'auto' }}  >
 
             <TextField
                 id="outlined-email"
