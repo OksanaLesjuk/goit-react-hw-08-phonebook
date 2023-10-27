@@ -7,7 +7,7 @@ import { getContacts } from 'redux/selectors';
 import { addContacts } from 'redux/operations';
 import { Box, FormControl, InputLabel } from '@mui/material';
 
-export const ContactForm = () => {
+export const ContactForm = ({ onClose }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -38,6 +38,7 @@ export const ContactForm = () => {
       dispatch(addContacts(dataForm));
       setName('');
       setNumber('');
+      onClose();
     }
   };
 
