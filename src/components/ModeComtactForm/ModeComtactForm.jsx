@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import {
   ContactInput,
@@ -6,9 +6,9 @@ import {
 } from '../ContactForm/ContactForm.styled';
 
 import React from 'react';
-// import { getContacts } from 'redux/selectors';
+
 import { updateContacts } from 'redux/operations';
-import { Box, ButtonGroup, FormControl, InputLabel } from '@mui/material';
+import { Box, FormControl, InputLabel } from '@mui/material';
 
 export const ModeContactForm = ({ contact, onClose }) => {
   const [name, setName] = useState(contact.name);
@@ -41,10 +41,6 @@ export const ModeContactForm = ({ contact, onClose }) => {
       display="flex"
       flexDirection="column"
       gap="30px"
-
-      //   sx={{
-      //     width: 100,
-      //   }}
     >
       <FormControl variant="standard">
         <InputLabel shrink htmlFor="contact-name-input-md">
