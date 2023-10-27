@@ -1,18 +1,21 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
-import { ContactInput, ContactsFormButton } from './ContactForm.styled';
+import {
+  ContactInput,
+  ContactsFormButton,
+} from '../ContactForm/ContactForm.styled';
 
 import React from 'react';
-import { getContacts } from 'redux/selectors';
-import { addContacts } from 'redux/operations';
-import { Box, FormControl, InputLabel } from '@mui/material';
+// import { getContacts } from 'redux/selectors';
+import { updateContacts } from 'redux/operations';
+import { Box, ButtonGroup, FormControl, InputLabel } from '@mui/material';
 
-export const ContactForm = () => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+export const ModeContactForm = ({ contact, onClose }) => {
+  const [name, setName] = useState(contact.name);
+  const [number, setNumber] = useState(contact.number);
 
   const dispatch = useDispatch();
-  const { contacts } = useSelector(getContacts);
+  //   const { contacts } = useSelector(getContacts);
 
   const handleInput = e => {
     if (e.target.name === 'name') {
@@ -25,20 +28,10 @@ export const ContactForm = () => {
 
   const handleSubmitForm = e => {
     e.preventDefault();
-    console.log('submit :>> ');
 
     const dataForm = { name: name, number: number };
-
-    const existingContact = contacts.find(
-      contact => contact.name === dataForm.name
-    );
-    if (existingContact) {
-      alert(`${dataForm.name} is already in contacts`);
-    } else {
-      dispatch(addContacts(dataForm));
-      setName('');
-      setNumber('');
-    }
+    dispatch(updateContacts({ id: contact.id, dataForm }));
+    onClose();
   };
 
   return (
@@ -48,15 +41,18 @@ export const ContactForm = () => {
       display="flex"
       flexDirection="column"
       gap="30px"
-      width="300px"
+
+      //   sx={{
+      //     width: 100,
+      //   }}
     >
       <FormControl variant="standard">
-        <InputLabel shrink htmlFor="contact-name-input">
+        <InputLabel shrink htmlFor="contact-name-input-md">
           Name
         </InputLabel>
 
         <ContactInput
-          id="contact-name-input"
+          id="contact-name-input-md"
           onChange={handleInput}
           value={name}
           type="text"
@@ -68,18 +64,18 @@ export const ContactForm = () => {
           fullWidth
           sx={{
             '& .MuiInputBase-input': {
-              width: '300px',
+              width: '100%',
             },
           }}
         />
       </FormControl>
 
       <FormControl variant="standard">
-        <InputLabel shrink htmlFor="contact-number-input">
+        <InputLabel shrink htmlFor="contact-number-input-md">
           Number
         </InputLabel>
         <ContactInput
-          id="contact-number-input"
+          id="contact-number-input-md"
           onChange={handleInput}
           value={number}
           type="tel"
@@ -91,14 +87,28 @@ export const ContactForm = () => {
           fullWidth
           sx={{
             '& .MuiInputBase-input': {
-              width: '500px',
+              width: '100%',
             },
           }}
         />
       </FormControl>
-      <ContactsFormButton variant="outlined" type="submit">
-        Add contact
-      </ContactsFormButton>
+      <Box
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          gap: '20px',
+          justifyContent: 'center',
+        }}
+      >
+        <ContactsFormButton variant="outlined" type="button" onClick={onClose}>
+          Cancel
+        </ContactsFormButton>
+        <ContactsFormButton variant="outlined" type="submit">
+          Update contact
+        </ContactsFormButton>
+      </Box>
     </Box>
   );
 };
+
+export default ModeContactForm;

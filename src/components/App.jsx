@@ -1,24 +1,39 @@
 import { Route, Routes } from 'react-router-dom';
 
 import { Layout } from './Layout/Layout';
-import Login from 'pages/Login/Login';
-import Register from 'pages/Register/Register';
-import Home from 'pages/Home/Home';
-import Contacts from 'pages/Contacts/Contacts';
+import LoginPage from 'pages/LoginPage/LoginPage';
+import RegisterPage from 'pages/RegisterPage/RegisterPage';
+import HomePage from 'pages/HomePage/HomePage';
+import ContactsPage from 'pages/ContactsPage/ContactsPage';
 import PrivateRoute from 'guards/PrivateRoute';
+import PublikRoute from 'guards/PublikRoute';
 
 export const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
+        <Route index element={<HomePage />} />
+        <Route
+          path="login"
+          element={
+            <PublikRoute>
+              <LoginPage />
+            </PublikRoute>
+          }
+        />
+        <Route
+          path="register"
+          element={
+            <PublikRoute>
+              <RegisterPage />
+            </PublikRoute>
+          }
+        />
         <Route
           path="contacts"
           element={
             <PrivateRoute>
-              <Contacts />
+              <ContactsPage />
             </PrivateRoute>
           }
         />

@@ -128,3 +128,15 @@ export const deleteContacts = createAsyncThunk(
         }
     }
 );
+
+export const updateContacts = createAsyncThunk(
+    "contacts/updateContacts",
+    async ({ id, dataForm: { name, number } }, thunkAPI) => {
+        try {
+            const response = await myAxios.patch(`/contacts/${id}`, { name: name, number: number });
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.message);
+        }
+    }
+);

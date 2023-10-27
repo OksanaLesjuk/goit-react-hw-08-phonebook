@@ -1,25 +1,21 @@
-import { Typography } from '@mui/material';
-import FormLogin from 'components/FormLogin/FormLogin'
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom'
-import { signInUser } from 'redux/operations';
-import { getToken } from 'redux/selectors';
-import Box from '@mui/material/Box';
+
+import { useDispatch } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 import { Link as MuiLink } from '@mui/material';
-const Login = () => {
+import { Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+import FormLogin from 'components/FormLogin/FormLogin'
+import { signInUser } from 'redux/operations';
+
+
+const LoginPage = () => {
     const dispatch = useDispatch();
-    const isAuth = useSelector(getToken);
-    const navigate = useNavigate();
 
     const loginUser = (params) => {
         dispatch(signInUser(params))
     }
 
-    useEffect(() => {
-        isAuth && navigate('/contacts')
-    }, [isAuth, navigate])
+
 
     return (
         <> <FormLogin loginUser={loginUser} />
@@ -41,4 +37,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default LoginPage

@@ -1,18 +1,13 @@
 import FormRegister from 'components/FormRegistr/FormRegistr'
-import { useEffect } from 'react';
-
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
 import { signUpUser } from 'redux/operations';
-import { getToken } from 'redux/selectors';
 import { Link as RouterLink } from 'react-router-dom';
 import { Box, Link as MuiLink, Typography } from '@mui/material';
 
 
 
 const Register = () => {
-    const isAuth = useSelector(getToken);
-    const navigate = useNavigate();
+
     const dispatch = useDispatch();
 
     const registration = (params) => {
@@ -21,9 +16,7 @@ const Register = () => {
         dispatch(signUpUser(params))
 
     }
-    useEffect(() => {
-        isAuth && navigate('/contacts')
-    }, [isAuth, navigate])
+
 
     return (
 
