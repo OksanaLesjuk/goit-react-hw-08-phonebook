@@ -5,7 +5,7 @@ import { getStatusUser, logOutUser, signInUser, signUpUser } from "./operations"
 const initialState = {
     user: { name: null, email: null },
     token: null,
-
+    error: null,
 
 };
 
@@ -15,6 +15,13 @@ const handleAuthFulfilled = (state, { payload }) => {
     state.token = payload.token;
 
 }
+const handleAuthRejected = (state, action) => {
+
+    state.error = action.payload;
+    alert('Something went wrong. Please check if your email user, name or password are valid')
+
+};
+
 
 const usersSlice = createSlice({
     name: 'authUser',
@@ -36,6 +43,9 @@ const usersSlice = createSlice({
 
 
             })
+            .addCase(signUpUser.rejected, handleAuthRejected)
+            .addCase(signInUser.rejected, handleAuthRejected)
+
     }
 
 })

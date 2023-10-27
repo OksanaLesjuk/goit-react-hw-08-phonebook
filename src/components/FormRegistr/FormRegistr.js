@@ -4,6 +4,7 @@ import { Box, Button, FormControl, IconButton, InputAdornment, InputLabel, Outli
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 
+
 const FormRegister = ({ registration }) => {
     const [showPassword, setShowPassword] = useState(false);
     const [passwordMismatch, setPasswordMismatch] = useState(false);
@@ -31,6 +32,7 @@ const FormRegister = ({ registration }) => {
                 setFieldError('confirmPassword', 'Passwords do not match');
                 setPasswordMismatch(true);
             } else {
+                console.log('valuesRegistr :>> ', values);
                 registration({
                     name: values.name,
                     email: values.email,
